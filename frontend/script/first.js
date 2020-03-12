@@ -82,10 +82,10 @@ var use_api = /** @class */ (function () {
         var i;
         var containeer = document.getElementById("value");
         for (i = 0; i < this.size; i++) {
-            containeer.innerHTML += "<div class=\"card text-white bg-primary mb-3\" style=\"max-width: 18rem;\">\n            <div class=\"card-header\" id=\"header" + i + "\"></div>\n            \n              <h5 class=\"card-title\" id = \"titile" + i + "\"></h5>\n              <h5 class=\"card-title\" id = \"geneder" + i + "\"></h5>\n              <p class=\"card-text\" id = \"info" + i + "\"></p>\n            </div>\n          </div>";
+            containeer.innerHTML += "<div class=\"card text-white bg-primary mb-3\" style=\"max-width: 30rem;\">\n            <div class=\"card-header\" id=\"header" + i + "\"></div>\n        \n              <h5 class=\"card-title\" id = \"geneder" + i + "\"></h5>\n              <p class=\"card-text\" id = \"info" + i + "\"></p>\n            </div>\n          </div>";
         }
         for (i = 0; i < this.size; i++) {
-            var valuess = document.getElementById("titile" + i);
+            var valuess = document.getElementById("header" + i);
             // valuess.innerText="dsjfgsdg";
             valuess.innerText = "Name = " + salutation[data["Table"][i]["salutationId"]] + " " + data["Table"][i]["firstName"] + " " + (data["Table"][i]["middleName"] === null ? "" : data["Table"][i]["middleName"]) + " " + data["Table"][i]["lastName"];
             document.getElementById("geneder" + i).innerText = "Gender = " + gen[data["Table"][i]["employeeGenderId"]];
