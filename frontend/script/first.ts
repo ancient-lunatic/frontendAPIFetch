@@ -1,14 +1,14 @@
 class use_api
 {
     url:string;
-    value: HTMLDivElement
+    
     size:number;
 
     async hitApi()
     {
         this.url = "https://localhost:44382/values/getrecord";
         let data =await this.getApiCall(this.url);
-        this.value = document.getElementById("1");
+       
         this.size= data["Table"].length ;
         //this.value.innerHTML = data[0]["date"];
         console.log(data, "012d656ds4v654f65d4vdfvfv");
@@ -35,6 +35,9 @@ class use_api
 
     dynamic_card(data)
     {
+        let salutation = ["" ,"Mr." , "Mrs." , "Miss." , "Ms." , "Dr."];
+        let gen = ["", "male" , "female" , "others"];
+
         const lene: number = this.size;
         let i:number;
         var containeer = document.getElementById("value");
@@ -42,9 +45,10 @@ class use_api
         for(i=0; i<this.size; i++)
         {   
             containeer.innerHTML += `<div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-            <div class="card-header" id="header${i}></div>
+            <div class="card-header" id="header${i}"></div>
             
               <h5 class="card-title" id = "titile${i}"></h5>
+              <h5 class="card-title" id = "geneder${i}"></h5>
               <p class="card-text" id = "info${i}"></p>
             </div>
           </div>`
@@ -55,9 +59,13 @@ class use_api
         for(i=0; i<this.size; i++)
         {   
 
-           let valuess = document.getElementById("titile"+i);
-           valuess.innerText = "Name = " + data["Table"][0]["firstName"] +" "+(  data["Table"][0]["firstName"]!="null"? data["Table"][0]["firstName"] : "") + " " +data["Table"][0]["lasrName"];
-        }
+           var valuess = document.getElementById("titile"+i);
+            // valuess.innerText="dsjfgsdg";
+            valuess.innerText = "Name = " + salutation[data["Table"][i]["salutationId"]] +" "+ data["Table"][i]["firstName"] +" "+(  data["Table"][i]["middleName"]===null? "" : data["Table"][i]["middleName"]) + " " + data["Table"][i]["lastName"];
+             document.getElementById("geneder"+i).innerText ="Gender = "+ gen[data["Table"][i]["employeeGenderId"]];
+             document.getElementById("info"+i).innerText ="Birth Date = "+ data["Table"][i]["birthDate"];
+
+            }
         
         }
     }

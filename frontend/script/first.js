@@ -47,7 +47,6 @@ var use_api = /** @class */ (function () {
                         return [4 /*yield*/, this.getApiCall(this.url)];
                     case 1:
                         data = _a.sent();
-                        this.value = document.getElementById("1");
                         this.size = data["Table"].length;
                         //this.value.innerHTML = data[0]["date"];
                         console.log(data, "012d656ds4v654f65d4vdfvfv");
@@ -77,18 +76,24 @@ var use_api = /** @class */ (function () {
     };
     // console.log(data["Table"].length);
     use_api.prototype.dynamic_card = function (data) {
+        var salutation = ["", "Mr.", "Mrs.", "Miss.", "Ms.", "Dr."];
+        var gen = ["", "male", "female", "others"];
         var lene = this.size;
         var i;
         var containeer = document.getElementById("value");
         for (i = 0; i < this.size; i++) {
-            containeer.innerHTML += "<div class=\"card text-white bg-primary mb-3\" style=\"max-width: 18rem;\">\n            <div class=\"card-header\" id=\"header" + i + "></div>\n            <div class=\"card-body\" id=\"body" + i + "\">\n              <h5 class=\"card-title\" id = \"titile" + i + "\"></h5>\n              <p class=\"card-text\" id = \"info" + i + "\"></p>\n            </div>\n          </div>";
+            containeer.innerHTML += "<div class=\"card text-white bg-primary mb-3\" style=\"max-width: 18rem;\">\n            <div class=\"card-header\" id=\"header" + i + "\"></div>\n            \n              <h5 class=\"card-title\" id = \"titile" + i + "\"></h5>\n              <h5 class=\"card-title\" id = \"geneder" + i + "\"></h5>\n              <p class=\"card-text\" id = \"info" + i + "\"></p>\n            </div>\n          </div>";
         }
         for (i = 0; i < this.size; i++) {
             var valuess = document.getElementById("titile" + i);
-            valuess.innerText = "Name = " + data["Table"][0]["firstName"] + " " + (data["Table"][0]["firstName"] != "null" ? data["Table"][0]["firstName"] : "") + " " + data["Table"][0]["lasrName"];
+            // valuess.innerText="dsjfgsdg";
+            valuess.innerText = "Name = " + salutation[data["Table"][i]["salutationId"]] + " " + data["Table"][i]["firstName"] + " " + (data["Table"][i]["middleName"] === null ? "" : data["Table"][i]["middleName"]) + " " + data["Table"][i]["lastName"];
+            document.getElementById("geneder" + i).innerText = "Gender = " + gen[data["Table"][i]["employeeGenderId"]];
+            document.getElementById("info" + i).innerText = "Birth Date = " + data["Table"][i]["birthDate"];
         }
     };
     return use_api;
 }());
 var a = new use_api();
 a.hitApi();
+// <div class="card-body" id="body${i}">
